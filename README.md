@@ -56,9 +56,7 @@ frontend/
 │   ├── index.js             # React app entry point
 │   └── .env                 # Environment variables (e.g. API base URL)
 
-###backend
 
-'''plaintext
 backend/
 ├── app.py                   # Flask application entry point
 ├── config.py                # Configuration for DB, JWT, CORS
