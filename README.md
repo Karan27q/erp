@@ -1,110 +1,114 @@
+frontend/
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+│
+├── src/
+│   ├── assets/                # Logos, images, CSS files
+│   ├── components/            # Reusable UI components
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── ProtectedRoute.jsx
+│   │   ├── Notification.jsx
+│   │   └── Loader.jsx
+│   │
+│   ├── pages/                 # Pages mapped to routes
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── AdminDashboard.jsx
+│   │   ├── EmployeeDashboard.jsx
+│   │   ├── EmployeesList.jsx
+│   │   ├── EmployeeForm.jsx
+│   │   ├── AttendanceReport.jsx
+│   │   ├── LeaveApply.jsx
+│   │   ├── LeaveRequests.jsx
+│   │   ├── LeaveHistory.jsx
+│   │   ├── PayrollSetup.jsx
+│   │   ├── PayslipDownload.jsx
+│   │   ├── TaskAssign.jsx
+│   │   ├── TasksList.jsx
+│   │   ├── Reports.jsx
+│   │   ├── Settings.jsx
+│   │   └── Profile.jsx
+│   │
+│   ├── services/              # Axios calls and API helpers
+│   │   ├── authService.js
+│   │   ├── employeeService.js
+│   │   ├── attendanceService.js
+│   │   ├── leaveService.js
+│   │   ├── payrollService.js
+│   │   ├── taskService.js
+│   │   ├── reportService.js
+│   │   └── notificationService.js
+│   │
+│   ├── context/               # AuthContext, global state
+│   │   ├── AuthProvider.jsx
+│   │   ├── NotificationProvider.jsx
+│   │
+│   ├── App.js                 # Main app + routes
+│   ├── index.js               # Entry point
+│   ├── App.css                # Global styles
+│   └── .env                   # REACT_APP_API_URL=http://localhost:5000/api
+│
+├── package.json
+└── .gitignore
 
-# Employee ERP System
 
-## Overview
-The Employee ERP System is a comprehensive web application designed to manage employee information, attendance, leave, payroll, and tasks efficiently. It supports both employee and admin (HR) roles with role-based access control, detailed dashboards, and reporting features.
 
----
 
-## Features
-
-### 1. Authentication
-- **Employee Login/Register**
-  - Input Credentials
-  - Backend Authentication API
-  - Verify credentials in MySQL
-  - JWT Session Token generation
-  - Redirect to Employee Dashboard
-- **Admin/HR Login**
-  - Input Admin Credentials
-  - Backend Authentication API
-  - Verify credentials in MySQL
-  - JWT Session Token generation
-  - Redirect to Admin Dashboard
-- **Role-Based Access Control**
-  - Validate JWT & User Role
-  - Grant access to permitted modules
-  - Redirect unauthorized users
-
-### 2. Dashboard
-- **Admin Dashboard**
-  - View total employees
-  - Leave requests summary
-  - Attendance overview charts
-  - Payroll summary & reports
-- **Employee Dashboard**
-  - Profile summary
-  - Attendance status
-  - Leave status
-  - Payslip download option
-
-### 3. Employee Management
-- Add, edit, delete employee records
-- Assign department and roles via dropdown menus
-- View detailed employee profiles
-
-### 4. Attendance Management
-- Employees can mark check-in/check-out
-- Backend attendance API
-- Store attendance in MySQL
-- Generate daily & monthly attendance reports
-- Notifications for late/early entries
-
-### 5. Leave Management
-- Employee leave application form
-- Leave types dropdown (Sick, Casual)
-- HR/Manager approval workflow
-- Update leave status in database
-- Employee notification on approval/rejection
-- Leave history report
-
-### 6. Payroll Management
-- Admin salary setup form
-- Automated salary calculation logic
-- Bonus and deduction handling
-- Generate payslip in PDF format
-- Store payslips in the database
-- Employees can download payslips
-
-### 7. Task Management (Optional)
-- HR/Admin task assignment form
-- Assign tasks to employees
-- Employees can view and update task status
-- Set deadlines for tasks
-- Notifications and reminders
-
-### 8. Notifications / Alerts
-- Email notifications for leave approval/rejection
-- Task assignment notifications
-- Payslip generation notifications
-- General announcements
-
-### 9. Reports
-- Generate attendance reports (CSV/PDF)
-- Generate leave reports
-- Payroll reports
-- Export all reports to Excel or PDF
-
-### 10. Settings & Profile
-- Change password for employees and HR
-- Edit profile details
-- Admin can update company settings (e.g., company name, leave policies)
-- Upload company logo and branding
-
----
-
-## Tech Stack
-- Backend: Node.js / Express (example, adjust as per your stack)
-- Database: MySQL
-- Authentication: JWT
-- Frontend: React / Angular / Vue (adjust accordingly)
-- PDF Generation: [Library you use]
-- Notifications: Email service integration
-
----
-
-## Getting Started
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/employee-erp-system.git
+backend/
+├── app.py                 # Flask entry point
+├── config.py              # Config: DB, JWT, CORS
+├── requirements.txt       # pip install -r requirements.txt
+├── instance/              # Local instance config (optional)
+│   └── config.py
+│
+├── /routes/               # Routes (API endpoints)
+│   ├── __init__.py
+│   ├── auth_routes.py
+│   ├── employee_routes.py
+│   ├── attendance_routes.py
+│   ├── leave_routes.py
+│   ├── payroll_routes.py
+│   ├── task_routes.py
+│   ├── report_routes.py
+│   ├── notification_routes.py
+│   └── settings_routes.py
+│
+├── /controllers/          # Business logic handlers
+│   ├── __init__.py
+│   ├── auth_controller.py
+│   ├── employee_controller.py
+│   ├── attendance_controller.py
+│   ├── leave_controller.py
+│   ├── payroll_controller.py
+│   ├── task_controller.py
+│   ├── report_controller.py
+│   ├── notification_controller.py
+│   └── settings_controller.py
+│
+├── /models/               # ORM or raw SQL models
+│   ├── __init__.py
+│   ├── user.py
+│   ├── employee.py
+│   ├── attendance.py
+│   ├── leave.py
+│   ├── payroll.py
+│   ├── task.py
+│   ├── notification.py
+│   └── company_settings.py
+│
+├── /utils/                # Helpers (JWT, email, PDF, CSV)
+│   ├── __init__.py
+│   ├── jwt_handler.py
+│   ├── email_service.py
+│   ├── pdf_generator.py
+│   ├── csv_exporter.py
+│   └── logger.py
+│
+├── /migrations/           # DB migration scripts (optional)
+│   ├── versions/
+│   ├── env.py
+│   └── README
+│
+└── .env                   # DB creds, JWT_SECRET, etc.
