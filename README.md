@@ -1,87 +1,110 @@
-# erp
 
-erp flowchart
-Employee ERP System
-├── 1. Authentication
-│     ├── Employee Login/Register
-│     │     ├── Input Credentials
-│     │     ├── Backend Auth API
-│     │     ├── Verify in MySQL
-│     │     ├── JWT Session Token
-│     │     └── Redirect to Employee Dashboard
-│     ├── Admin/HR Login
-│     │     ├── Input Admin Credentials
-│     │     ├── Backend Auth API
-│     │     ├── Verify in MySQL
-│     │     ├── JWT Session Token
-│     │     └── Redirect to Admin Dashboard
-│     └── Role-Based Access Control
-│           ├── Validate JWT & Role
-│           ├── Grant Access to Modules
-│           └── Redirect Unauthorized
+# Employee ERP System
 
-├── 2. Dashboard
-│     ├── Admin Dashboard
-│     │     ├── View Total Employees
-│     │     ├── View Leave Requests Summary
-│     │     ├── Attendance Overview Chart
-│     │     ├── Payroll Summary & Reports
-│     └── Employee Dashboard
-│           ├── Profile Summary
-│           ├── Attendance Status
-│           ├── Leave Status
-│           ├── Payslip Download Button
+## Overview
+The Employee ERP System is a comprehensive web application designed to manage employee information, attendance, leave, payroll, and tasks efficiently. It supports both employee and admin (HR) roles with role-based access control, detailed dashboards, and reporting features.
 
-├── 3. Employee Management
-│     ├── Add/Edit/Delete Employee Form
-│     ├── Assign Department & Role Dropdown
-│     ├── View Employee Details Page
+---
 
-├── 4. Attendance Management
-│     ├── Employee Mark Check-in/Check-out
-│     ├── Backend Attendance API
-│     ├── Store in MySQL Attendance Table
-│     ├── Daily & Monthly Attendance Report
-│     └── Late/Early Entry Notifications
+## Features
 
-├── 5. Leave Management
-│     ├── Employee Apply Leave Form
-│     ├── Leave Types Dropdown (Sick, Casual)
-│     ├── HR/Manager Approval Workflow
-│     ├── Update Status in DB
-│     ├── Notify Employee
-│     └── Leave History Report
+### 1. Authentication
+- **Employee Login/Register**
+  - Input Credentials
+  - Backend Authentication API
+  - Verify credentials in MySQL
+  - JWT Session Token generation
+  - Redirect to Employee Dashboard
+- **Admin/HR Login**
+  - Input Admin Credentials
+  - Backend Authentication API
+  - Verify credentials in MySQL
+  - JWT Session Token generation
+  - Redirect to Admin Dashboard
+- **Role-Based Access Control**
+  - Validate JWT & User Role
+  - Grant access to permitted modules
+  - Redirect unauthorized users
 
-├── 6. Payroll Management
-│     ├── Admin Salary Setup Form
-│     ├── Auto Salary Calculation Logic
-│     ├── Bonus & Deduction Logic
-│     ├── Generate Payslip (PDF)
-│     ├── Store Payslip in DB
-│     ├── Employee Download Payslip
+### 2. Dashboard
+- **Admin Dashboard**
+  - View total employees
+  - Leave requests summary
+  - Attendance overview charts
+  - Payroll summary & reports
+- **Employee Dashboard**
+  - Profile summary
+  - Attendance status
+  - Leave status
+  - Payslip download option
 
-├── 7. Task Management (Optional)
-│     ├── HR/Admin Assign Task Form
-│     ├── Assign to Employee
-│     ├── Employee View Task
-│     ├── Update Task Status (Pending, In Progress, Done)
-│     ├── Set Deadlines
-│     └── Notifications & Reminders
+### 3. Employee Management
+- Add, edit, delete employee records
+- Assign department and roles via dropdown menus
+- View detailed employee profiles
 
-├── 8. Notifications / Alerts
-│     ├── Leave Approved/Rejected Email
-│     ├── Task Assigned Notification
-│     ├── Payslip Generated Notification
-│     ├── General Announcements
+### 4. Attendance Management
+- Employees can mark check-in/check-out
+- Backend attendance API
+- Store attendance in MySQL
+- Generate daily & monthly attendance reports
+- Notifications for late/early entries
 
-├── 9. Reports
-│     ├── Generate Attendance Report (CSV/PDF)
-│     ├── Generate Leave Report
-│     ├── Payroll Report
-│     ├── Export All to Excel/PDF
+### 5. Leave Management
+- Employee leave application form
+- Leave types dropdown (Sick, Casual)
+- HR/Manager approval workflow
+- Update leave status in database
+- Employee notification on approval/rejection
+- Leave history report
 
-└── 10. Settings & Profile
-      ├── Employee/HR Change Password
-      ├── Edit Profile Details
-      ├── Admin Company Settings (Company Name, Leave Policies)
-      └── Upload Company Logo / Branding
+### 6. Payroll Management
+- Admin salary setup form
+- Automated salary calculation logic
+- Bonus and deduction handling
+- Generate payslip in PDF format
+- Store payslips in the database
+- Employees can download payslips
+
+### 7. Task Management (Optional)
+- HR/Admin task assignment form
+- Assign tasks to employees
+- Employees can view and update task status
+- Set deadlines for tasks
+- Notifications and reminders
+
+### 8. Notifications / Alerts
+- Email notifications for leave approval/rejection
+- Task assignment notifications
+- Payslip generation notifications
+- General announcements
+
+### 9. Reports
+- Generate attendance reports (CSV/PDF)
+- Generate leave reports
+- Payroll reports
+- Export all reports to Excel or PDF
+
+### 10. Settings & Profile
+- Change password for employees and HR
+- Edit profile details
+- Admin can update company settings (e.g., company name, leave policies)
+- Upload company logo and branding
+
+---
+
+## Tech Stack
+- Backend: Node.js / Express (example, adjust as per your stack)
+- Database: MySQL
+- Authentication: JWT
+- Frontend: React / Angular / Vue (adjust accordingly)
+- PDF Generation: [Library you use]
+- Notifications: Email service integration
+
+---
+
+## Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/employee-erp-system.git
