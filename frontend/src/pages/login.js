@@ -1,22 +1,52 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!form.username || !form.password) {
       setError("Both fields are required.");
       return;
     }
-    // TODO: Add login logic here (API call)
-    alert(`Logging in as ${form.username}`);
+
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      // Save token and redirect
+      localStorage.setItem("token", data.token);
+      navigate("/dashboard");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegister = () => {
+    navigate("/register");
   };
 
   return (
@@ -43,91 +73,55 @@ const Login = () => {
           alignItems: "center",
         }}
       >
-        {/* Logo/Icon */}
-        <div
-          style={{
-            background: "#e3f2fd",
-            borderRadius: "50%",
-            width: 64,
-            height: 64,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 18,
-            boxShadow: "0 2px 8px rgba(25, 118, 210, 0.10)",
-          }}
-        >
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="#1976d2" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 12c2.7 0 8 1.34 8 4v2H4v-2c0-2.66 5.3-4 8-4zm0-2a4 4 0 100-8 4 4 0 000 8z" />
-          </svg>
-        </div>
-        <h2
-          style={{
-            marginBottom: "1.5rem",
-            textAlign: "center",
-            fontWeight: 700,
-            fontSize: 28,
-            color: "#1976d2",
-            letterSpacing: 1,
-          }}
-        >
-          ERP Login
-        </h2>
-        <div style={{ marginBottom: "1.1rem", width: "100%" }}>
-          <label style={{ display: "block", marginBottom: 7, fontWeight: 500, color: "#333" }} htmlFor="username">
-            Username or Email
-          </label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: "11px 12px",
-              borderRadius: 6,
-              border: "1.5px solid #b6c6e3",
-              fontSize: 16,
-              outline: "none",
-              transition: "border 0.2s",
-              boxSizing: "border-box",
-            }}
-            autoComplete="username"
-            onFocus={e => (e.target.style.border = '1.5px solid #1976d2')}
-            onBlur={e => (e.target.style.border = '1.5px solid #b6c6e3')}
-          />
-        </div>
-        <div style={{ marginBottom: "1.1rem", width: "100%" }}>
-          <label style={{ display: "block", marginBottom: 7, fontWeight: 500, color: "#333" }} htmlFor="password">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: "11px 12px",
-              borderRadius: 6,
-              border: "1.5px solid #b6c6e3",
-              fontSize: 16,
-              outline: "none",
-              transition: "border 0.2s",
-              boxSizing: "border-box",
-            }}
-            autoComplete="current-password"
-            onFocus={e => (e.target.style.border = '1.5px solid #1976d2')}
-            onBlur={e => (e.target.style.border = '1.5px solid #b6c6e3')}
-          />
-        </div>
+        <h2 style={{ marginBottom: 24, color: "#1976d2" }}>Login</h2>
+
         {error && (
-          <div style={{ color: "#d32f2f", marginBottom: "1.1rem", textAlign: "center", width: "100%" }}>{error}</div>
+          <div style={{ color: "red", marginBottom: 16 }}>{error}</div>
         )}
+
+        <label htmlFor="username" style={{ display: "none" }}>
+          Username
+        </label>
+        <input
+          id="username"
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={form.username}
+          onChange={handleChange}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "16px",
+            border: "1px solid #bdbdbd",
+            borderRadius: 6,
+            fontSize: 16,
+          }}
+        />
+
+        <label htmlFor="password" style={{ display: "none" }}>
+          Password
+        </label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "16px",
+            border: "1px solid #bdbdbd",
+            borderRadius: 6,
+            fontSize: 16,
+          }}
+        />
+
         <button
           type="submit"
+          disabled={loading}
           style={{
             width: "100%",
             padding: "12px 0",
@@ -137,16 +131,57 @@ const Login = () => {
             borderRadius: 6,
             fontWeight: 700,
             fontSize: 17,
-            cursor: "pointer",
+            cursor: loading ? "not-allowed" : "pointer",
             marginTop: 10,
             boxShadow: "0 2px 8px rgba(25, 118, 210, 0.10)",
             letterSpacing: 0.5,
             transition: "background 0.2s, transform 0.1s",
+            opacity: loading ? 0.6 : 1,
           }}
-          onMouseOver={e => (e.target.style.background = 'linear-gradient(90deg, #1565c0 60%, #1976d2 100%)')}
-          onMouseOut={e => (e.target.style.background = 'linear-gradient(90deg, #1976d2 60%, #42a5f5 100%)')}
+          onMouseOver={(e) => {
+            if (!loading) {
+              e.target.style.background =
+                "linear-gradient(90deg, #1565c0 60%, #1976d2 100%)";
+            }
+          }}
+          onMouseOut={(e) => {
+            if (!loading) {
+              e.target.style.background =
+                "linear-gradient(90deg, #1976d2 60%, #42a5f5 100%)";
+            }
+          }}
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
+        </button>
+
+        <button
+          type="button"
+          onClick={handleRegister}
+          style={{
+            width: "100%",
+            padding: "12px 0",
+            background: "#fff",
+            color: "#1976d2",
+            border: "1.5px solid #1976d2",
+            borderRadius: 6,
+            fontWeight: 700,
+            fontSize: 17,
+            cursor: "pointer",
+            marginTop: 14,
+            boxShadow: "0 2px 8px rgba(25, 118, 210, 0.06)",
+            letterSpacing: 0.5,
+            transition: "background 0.2s, color 0.2s",
+          }}
+          onMouseOver={(e) => {
+            e.target.style.background = "#1976d2";
+            e.target.style.color = "#fff";
+          }}
+          onMouseOut={(e) => {
+            e.target.style.background = "#fff";
+            e.target.style.color = "#1976d2";
+          }}
+        >
+          Register
         </button>
       </form>
     </div>
