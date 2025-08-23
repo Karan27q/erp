@@ -44,34 +44,6 @@ This project is a comprehensive Employee Management System designed to streamlin
 ### Frontend
 
 ```plaintext
-frontend/
-├── public/                  # Static files: index.html, favicon.ico
-├── src/
-│   ├── assets/              # Images, logos, CSS files
-│   ├── components/          # Reusable UI components (Navbar, Footer, Loader, etc.)
-│   ├── pages/               # React pages mapped to routes (Login, Dashboard, Reports, etc.)
-│   ├── services/            # API calls using Axios organized by feature
-│   ├── context/             # React Context for global state (Auth, Notifications)
-│   ├── App.js               # Main app and routing configuration
-│   ├── index.js             # React app entry point
-│   └── .env                 # Environment variables (e.g. API base URL)
-
-
-backend/
-├── app.py                   # Flask application entry point
-├── config.py                # Configuration for DB, JWT, CORS
-├── requirements.txt         # Python dependencies
-├── instance/                # Optional local config overrides
-├── routes/                  # Flask route definitions for API endpoints
-├── controllers/             # Business logic for each route
-├── models/                  # ORM models representing database tables
-├── utils/                   # Helper utilities (JWT handling, email, PDF generation, etc.)
-├── migrations/              # Database migration scripts
-└── .env                     # Environment variables (DB credentials, secrets)
-
-
-
-###PATH
 
 frontend/
 ├── public/
