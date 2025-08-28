@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.navbar {
+  background: #1a2344;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  color: white;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.nav-item:hover {
+  background: #4f8cff;
+}
+
+.page {
+  padding: 20px;
+}
+
+.section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}

@@ -68,8 +68,9 @@
   }
   .modal { 
     width:560px; max-width:92vw; 
-    background:#0f1530; 
-    border:1px solid #233; 
+    background:#000000; 
+    border:1px solid #223; 
+    color: white;
     border-radius:16px; 
     padding:18px; 
   }
