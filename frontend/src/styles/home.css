@@ -1,0 +1,8 @@
+.hero {
+  background: url("../images/home_page.png") no-repeat center center/cover;
+  height: 100vh; /* full screen height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}

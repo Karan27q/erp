@@ -1,10 +1,11 @@
 import React from "react";
+import "../styles/home.css";
+import home_image from "../images/home_page.png";
 
 function Home() {
   return (
     <section className="hero">
-      <h1>Welcome to Employee Management System</h1>
-      <p>Manage employees, recruitment, tasks, payroll, and more all in one place.</p>
+      {/* <img src={home_image} alt="hero"/> */}
     </section>
   );
 }
